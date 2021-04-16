@@ -35,14 +35,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
-          name: godot-cpp-linux-glibc2.23-x86_64-release
-          path: bin/libgodot-cpp.linux.release.64.a
-          if-no-files-found: error
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2.2.2
-        with:
-          name: godot-cpp-linux-glibc2.23-x86-release
-          path: bin/libgodot-cpp.linux.release.32.a
+          name: godot-cpp-linux-glibc2.23-release
+          path: bin/
           if-no-files-found: error
 
       - name: Build test GDNative library
@@ -78,15 +72,10 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
-          name: godot-cpp-windows-msvc2019-x86_64-release
-          path: bin/libgodot-cpp.windows.release.64.lib
+          name: godot-cpp-windows-msvc2019-release
+          path: bin/
           if-no-files-found: error
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2.2.2
-        with:
-          name: godot-cpp-windows-msvc2019-x86-release
-          path: bin/libgodot-cpp.windows.release.32.lib
-          if-no-files-found: error
+
   windows-mingw:
     name: Build (Windows, MinGW)
     runs-on: windows-2019
@@ -118,14 +107,8 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
-          name: godot-cpp-linux-mingw-x86_64-release
-          path: bin/libgodot-cpp.windows.release.64.a
-          if-no-files-found: error
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2.2.2
-        with:
-          name: godot-cpp-linux-mingw-x86-release
-          path: bin/libgodot-cpp.windows.release.32.a
+          name: godot-cpp-linux-mingw-release
+          path: bin/
           if-no-files-found: error
 
   macos:
