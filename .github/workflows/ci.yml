@@ -1,6 +1,6 @@
 name: Continuous integration
 on: 
-  push: [ master ]
+  push:
     branches: [ master ]
   workflow-dispatch:
 
