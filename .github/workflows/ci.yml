@@ -27,6 +27,7 @@ jobs:
       - name: Build godot-cpp
         run: |
           scons target=release generate_bindings=yes -j $(nproc)
+          scons target=release bits=32 generate_bindings=yes -j $(nproc)
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
@@ -34,11 +35,17 @@ jobs:
           name: godot-cpp-linux-glibc2.23-x86_64-release
           path: bin/libgodot-cpp.linux.release.64.a
           if-no-files-found: error
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          name: godot-cpp-linux-glibc2.23-x86-release
+          path: bin/libgodot-cpp.linux.release.32.a
+          if-no-files-found: error
 
       - name: Build test GDNative library
         run: |
           scons target=release platform=linux bits=64 -j $(nproc) -C test
-
+          scons target=release platform=linux bits=32 -j $(nproc) -C test
       - name: Run test GDNative library
         run: |
           ./Godot_v3.2.3-stable_linux_server.64 --path test -s script.gd
@@ -64,14 +71,19 @@ jobs:
       - name: Build godot-cpp
         run: |
           scons target=release generate_bindings=yes -j $env:NUMBER_OF_PROCESSORS
-
+          scons target=release bits=32 generate_bindings=yes -j $env:NUMBER_OF_PROCESSORS
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           name: godot-cpp-windows-msvc2019-x86_64-release
           path: bin/libgodot-cpp.windows.release.64.lib
           if-no-files-found: error
-
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          name: godot-cpp-windows-msvc2019-x86-release
+          path: bin/libgodot-cpp.windows.release.32.lib
+          if-no-files-found: error
   windows-mingw:
     name: Build (Windows, MinGW)
     runs-on: windows-2019
@@ -98,12 +110,19 @@ jobs:
           g++ --version
           gcc --version
           scons target=release generate_bindings=yes use_mingw=yes -j $env:NUMBER_OF_PROCESSORS
+          scons target=release bits=32 generate_bindings=yes use_mingw=yes -j $env:NUMBER_OF_PROCESSORS
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2.2.2
         with:
           name: godot-cpp-linux-mingw-x86_64-release
           path: bin/libgodot-cpp.windows.release.64.a
+          if-no-files-found: error
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2.2.2
+        with:
+          name: godot-cpp-linux-mingw-x86-release
+          path: bin/libgodot-cpp.windows.release.32.a
           if-no-files-found: error
 
   macos:
